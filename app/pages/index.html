@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/schedule.css">
 		<title>Working schedule 1.0</title>
 	</head>
 	<body>
@@ -10,19 +10,97 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<div class="col-md-4">
-						<div class="col-md-12">A</div>
-						<div class="col-md-12">B</div>
-						<div class="col-md-12">C</div>
-						<div class="col-md-12">D</div>
-					</div>
-					<div class="col-md-8">
-						<div class="col-md-12">A</div>
-					</div>
+					<table class="table table-striped table-bordered">
+                      <tr>
+                        <th class="month">Январь</th>
+                        <th class="">1</th>
+                        <th class="">2</th>
+                        <th class="">3</th>
+                        <th class="">4</th>
+                        <th class="">5</th>
+                        <th class="">6</th>
+                        <th class="">7</th>
+                        <th class="">8</th>
+                        <th class="">9</th>
+                        <th class="">10</th>
+                        <th class="">11</th>
+                        <th class="">12</th>
+                        <th class="">13</th>
+                        <th class="">14</th>
+                        <th class="">15</th>
+                        <th class="">16</th>
+                        <th class="">17</th>
+                        <th class="">18</th>
+                        <th class="">19</th>
+                        <th class="">20</th>
+                        <th class="">21</th>
+                        <th class="">22</th>
+                        <th class="">23</th>
+                        <th class="">24</th>
+                        <th class="">25</th>
+                        <th class="">26</th>
+                        <th class="">27</th>
+                        <th class="">28</th>
+                        <th class="">29</th>
+                        <th class="">30</th>
+                        <th class="">31</th>
+                      </tr>
+                      <tr>
+                        <td class="">Иванов</td>
+                        <td class=""></td>
+                        <td class=""></td>
+                        <td class=""></td>
+                        <td class="danger"></td>
+                        <td class=""></td>
+                        <td class=""></td>
+                        <td class="success"></td>
+                        <td class=""></td>
+                        <td class="info"></td>
+                        <td class=""></td>
+                        <td class=""></td>
+                        <td class=""></td>
+                        <td class=""></td>
+                        <td class=""></td>
+                        <td class=""></td>
+                        <td class=""></td>
+                        <td class=""></td>
+                        <td class=""></td>
+                        <td class=""></td>
+                        <td class=""></td>
+                        <td class=""></td>
+                        <td class=""></td>
+                        <td class=""></td>
+                        <td class=""></td>
+                        <td class=""></td>
+                        <td class=""></td>
+                        <td class=""></td>
+                        <td class=""></td>
+                        <td class=""></td>
+                        <td class=""></td>
+                        <td class=""></td>
+                      </tr>
+                    </table>
+                    <div class="table-responsive">
+                        <table class="test table table-bordered"></table>
+                    </div>
 				</div>
 			</div>
 		</div>
+        <div class="modal fade bs-example-modal-sm" id="myModal" role="dialog" tabindex="-1" aria-labelledby="myModal">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button> <h4 class="modal-title" id="mySmallModalLabel">Small modal</h4> 
+                    </div> 
+                    <div class="modal-body"> puk </div> 
+                </div> 
+            </div> 
+        </div>
 	</body>
+    <script src="assets/jquery/jquery.min.js"></script>
 	<script src="assets/js/all.min.js"></script>
 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script>
+        $('.test').schedule();
+    </script>
 </html>
