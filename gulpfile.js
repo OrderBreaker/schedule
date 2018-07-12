@@ -44,9 +44,9 @@ gulp.task('pages', function(){
 gulp.task('jscripts', function() {
     return gulp.src('app/js/*.js')
         .pipe(plumber())
-        .pipe(concat('all.js'))
+        .pipe(concat('schedule.js'))
         .pipe(uglify())
-        .pipe(rename('all.min.js'))
+        .pipe(rename('schedule.min.js'))
         .pipe(gulp.dest('dist/assets/js'));
 });
 

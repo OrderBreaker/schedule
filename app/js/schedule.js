@@ -35,7 +35,7 @@
             month: months[current_month]['name'],
             days: months[current_month]['days'],
             names: ["Kekan", "Pukan", "Syogun"],
-            holidays: [1,2,3,7]
+            holidays: []
         }, options);
         
         var output = function(){
@@ -45,12 +45,17 @@
                     holiday = i;
                     thead+='<th class="info">'+holiday+'</th>';
                 } else {
-                    day = i+1;
+                    day = i;
                     thead+="<th>"+day+"</th>";
                 }
-                rows+='<td><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-play"></span></td>';
+                rows+='<td></td>';
             }
-            thead+="</tr>";
+            rows+='<td></td>';
+            if (options == 0){
+                thead+="<th>"+months[current_month]['days']+"</th></tr>";   
+            } else {
+                thead+="<th>"+settings.days+"</th></tr>";
+            }
             for (var name=0; name<settings.names.length; name++){
                 tbody+="<tr><td>"+settings.names[name]+"</td>"+rows+"</tr>";
             }
@@ -58,6 +63,6 @@
             return content;
         }
         
-        return this.html(output());
+        return this.html(output);
     };
 }(jQuery));
