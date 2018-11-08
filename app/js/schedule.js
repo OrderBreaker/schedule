@@ -1,11 +1,13 @@
+'use strict';
 (function ($) {
     $.fn.schedule = function(options){
         
         var d = new Date();
         var current_year = d.getFullYear();
         var current_month = d.getMonth();
+        var current_time = "" + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + "";
         
-        var february = function(year){
+        function february(year){
             var days;
             if(year % 4 === 0){
                 days = 29;
@@ -16,50 +18,154 @@
         }
         var f = february(current_year);
         
+        var sat = new Array();
+        var sun = new Array();
+        
         var months = {
-            0: {name: "Январь", days: 31},
-            1: {name: "Февраль", days: f},
-            2: {name: "Март", days: 31},
-            3: {name: "Апрель", days: 30},
-            4: {name: "Май", days: 31},
-            5: {name: "Июнь", days: 30},
-            6: {name: "Июль", days: 31},
-            7: {name: "Август", days: 31},
-            8: {name: "Сентябрь", days: 30},
-            9: {name: "Октябрь", days: 31},
-            10: {name: "Ноябрь", days: 30},
-            11: {name: "Декабрь", days: 31},
+            0: {name: "Январь", short: "01", days: 31},
+            1: {name: "Февраль", short: "02", days: f},
+            2: {name: "Март", short: "03", days: 31},
+            3: {name: "Апрель", short: "04", days: 30},
+            4: {name: "Май", short: "05", days: 31},
+            5: {name: "Июнь", short: "06", days: 30},
+            6: {name: "Июль", short: "07", days: 31},
+            7: {name: "Август", short: "08", days: 31},
+            8: {name: "Сентябрь", short: "09", days: 30},
+            9: {name: "Октябрь", short: "10", days: 31},
+            10: {name: "Ноябрь", short: "11", days: 30},
+            11: {name: "Декабрь", short: "12", days: 31},
         };
         
+        for(var i=1; i<=months[current_month]['days']; i++){
+            var newDate = new Date(d.getFullYear(),d.getMonth(),i)
+            if(newDate.getDay()==0){
+                sat.push(i);
+            }
+            if(newDate.getDay()==6){
+                sun.push(i);
+            }
+
+        }
+
         var settings = $.extend({
             month: months[current_month]['name'],
             days: months[current_month]['days'],
-            names: ["Kekan", "Pukan", "Syogun"],
-            holidays: []
+            names: ["John Doe", "Wilson", "Mr. Proper"],
+            holidays: [],
+            data: [],
+            modal: "myModal"
         }, options);
         
+        /*function fillModal(){
+            for(var i = 0; i < settings.data.length; i++){
+                
+            }
+        }*/
+        
         var output = function(){
-            var thead = "<tr><th>"+settings.month+"</th>", tbody, rows, holiday, content, day;
-            for (var i=1; i<settings.days; i++){
-                if($.inArray(i, settings.holidays) !== -1){
-                    holiday = i;
-                    thead+='<th class="info">'+holiday+'</th>';
-                } else {
-                    day = i;
-                    thead+="<th>"+day+"</th>";
+ 
+            var thead = "<tr><th>"+settings.month+"</th>", tbody, cells, cell_amount, cell_block, isLate, dayFor, content, title, enter, out, enterCheck, outCheck, styleOfEye, enterModal, outModal;
+            
+            var dataParse = {
+                getLate: function(surname, day){
+                    var log;
+                    for(var key = 0; key < settings.data.length; key++){
+                        if(settings.data[key].username === surname && settings.data[key].day === day){
+                            log = settings.data[key].late;
+                        }
+                    }
+                    return log;
+                },
+//                logtype: function(surname, day, log){
+//                    var log;
+//                     for(var key = 0; key < settings.data.length; key++){
+//                        if(settings.data[key].username === surname && settings.data[key].day === day && settings.data[key].log_type == log){
+//                            log = settings.data[key].log_type;
+//                        }
+//                    }
+//                    return log;
+//                },
+                getEnter: function(surname, day){
+                    var log; 
+                    for(var key = 0; key < settings.data.length; key++){
+                        if(settings.data[key].username === surname && settings.data[key].day === day && settings.data[key].time < "12:00:00"){
+                            log = settings.data[key].time;
+                            break;
+                        }
+                    }
+                    return log;
+                },
+                getOut: function(surname, day){
+                    var log; 
+                    for(var key = 0; key < settings.data.length; key++){
+                        if(settings.data[key].username === surname && settings.data[key].day === day && settings.data[key].time > "15:00:00"){
+                            log = settings.data[key].time;
+                            break;
+                        }
+                    }
+                    return log;
                 }
-                rows+='<td></td>';
+            };
+            
+            for (var i=1; i<=settings.days; i++){
+                if(sat.indexOf(i) != -1 || sun.indexOf(i) != -1){
+                    thead+="<th style='background:#E494BB'>"+i+"</th>";
+                } else {
+                    thead+="<th>"+i+"</th>";
+                }
+                cells+= "<td></td>";
+                cell_amount = i;
             }
-            rows+='<td></td>';
-            if (options == 0){
-                thead+="<th>"+months[current_month]['days']+"</th></tr>";   
-            } else {
-                thead+="<th>"+settings.days+"</th></tr>";
+            thead+="</tr>";
+            //console.log('parse', dataParse.getLate('Пукин В.В.', "04"));
+            for(var n = 0; n<settings.names.length; n++){
+                for(var c = 1; c <=cell_amount; c++){
+                    dayFor = ""+c+"";
+                    
+                    enterCheck = dataParse.getEnter(settings.names[n], dayFor);
+                    outCheck = dataParse.getOut(settings.names[n], dayFor);
+                   
+                    
+                    if(enterCheck == undefined){
+                        enterModal = 'Не задано';
+                        enter = "<p>Приход не задан</p>";
+                    } else {
+                        enterModal = enterCheck;
+                        enter = "<p>Приход в "+enterModal+"</p>";
+                    }
+                    
+                    if(outCheck == undefined){
+                        styleOfEye = "success";
+                        out = "";
+                        outModal = 'Не задано';
+                    } else {
+                        styleOfEye = "getOut";
+                        out = "<p>Уход в "+outCheck+"</p>";
+                        outModal = outCheck;
+                    }
+                    
+                    title = enter+out;
+                    isLate = dataParse.getLate(settings.names[n], dayFor);
+                    
+                    if(isLate == 1){
+                        
+                        cell_block+='<td class="danger name-data"><span data-toggle="modal" data-target="#'+settings.modal+'"><a href="#" data-toggle="tooltip" data-html="true" class="info" data-placement="right" title="'+title+'" data-info="'+enterModal+', '+outModal+', '+dayFor+', '+months[current_month].short+', '+current_year+'"><i class="fa fa-user-times"></i></a></span></td>';
+                        
+                    } else if (isLate == undefined){
+                        cell_block+='<td></td>';
+                        
+                    } else {
+                        
+                        cell_block+='<td class="'+styleOfEye+' name-data"><span data-toggle="modal" data-target="#'+settings.modal+'" data-info="'+enterModal+', '+outModal+', '+dayFor+', '+months[current_month].short+', '+current_year+'"><a href="#" data-toggle="tooltip" data-html="true" class="info" data-placement="right" title="'+title+'"><i class="fa fa-user-o"></i></a></span></td>';
+                    }
+                    
+                }
+                tbody+="<tr><td>"+settings.names[n]+"</td>"+cell_block+"</tr>";
+                cell_block = "";
             }
-            for (var name=0; name<settings.names.length; name++){
-                tbody+="<tr><td>"+settings.names[name]+"</td>"+rows+"</tr>";
-            }
+            
             content = "<tbody>"+thead+tbody+"</tbody>";
+            
             return content;
         }
         

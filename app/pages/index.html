@@ -7,7 +7,7 @@
 	</head>
 	<body>
 		<h1>schedule test</h1>
-		<div class="container">
+		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-12">
 					<table class="table table-striped table-bordered">
@@ -92,7 +92,7 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button> <h4 class="modal-title" id="mySmallModalLabel">Small modal</h4> 
                     </div> 
-                    <div class="modal-body"> puk </div> 
+                    <div class="modal-body"></div> 
                 </div> 
             </div> 
         </div>
@@ -101,6 +101,46 @@
 	<script src="assets/js/schedule.min.js"></script>
 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script>
-        $('.test').schedule({names:["Степанида", "Кеканский", "Бандит", "Фрекен Бок"]});
+        let names = ["Смычников А.С.", "Беляков Е.А.", "Анисимов С.С.", "Гарипов А.Р.", "Пукин В.В.", "Сизый Я.К.", "Destination"];
+        let data = [
+            {"username": "Смычников А.С.", "time": "8:25:45", "day": "6", "late": 0},
+            {"username": "Беляков Е.А.", "time": "08:42:07", "day": "6", "late": 0},
+            {"username": "Анисимов С.С.", "time": "08:55:43", "day": "6", "late": 0},
+            {"username": "Гарипов А.Р.", "time": "08:56:53", "day": "6", "late": 0},
+            {"username": "Беляков Е.А.", "time": "18:02:07", "day": "6", "late": 0},
+            {"username": "Анисимов С.С.", "time": "18:05:43", "day": "6", "late": 0},
+            {"username": "Гарипов А.Р.", "time": "18:16:53", "day": "6", "late": 0},
+            {"username": "Смычников А.С.", "time": "19:25:45", "day": "6", "late": 0},
+            {"username": "Смычников А.С.", "time": "08:35:32", "day": "7", "late": 0},
+            {"username": "Анисимов С.С.", "time": "08:48:51", "day": "7", "late": 0},
+            {"username": "Гарипов А.Р.", "time": "08:49:01", "day": "7", "late": 0},
+            {"username": "Беляков Е.А.", "time": "08:54:35", "day": "7", "late": 0},
+            {"username": "Смычников А.С.", "time": "18:05:32", "day": "7", "late": 0},
+            {"username": "Гарипов А.Р.", "time": "18:07:01", "day": "7", "late": 0},
+            {"username": "Анисимов С.С.", "time": "18:08:51", "day": "7", "late": 0},
+            {"username": "Беляков Е.А.", "time": "18:14:35", "day": "7", "late": 0},
+            {"username": "Смычников А.С.", "time": "08:32:03", "day": "8", "late": 0},
+            {"username": "Беляков Е.А.", "time": "08:42:15", "day": "8", "late": 0},
+            {"username": "Анисимов С.С.", "time": "08:52:19", "day": "8", "late": 0},
+            {"username": "Гарипов А.Р.", "time": "09:02:48", "day": "8", "late": 1},
+            {"username": "Беляков Е.А.", "time": "18:02:15", "day": "8", "late": 0},
+            {"username": "Смычников А.С.", "time": "18:12:03", "day": "8", "late": 0},
+            {"username": "Гарипов А.Р.", "time": "18:12:48", "day": "8", "late": 0},
+            {"username": "Анисимов С.С.", "time": "18:12:59", "day": "8", "late": 0},
+            {"username": "Смычников А.С.", "time": "08:36:10", "day": "9", "late": 0},
+            {"username": "Беляков Е.А.", "time": "08:46:38", "day": "9", "late": 0},
+            {"username": "Гарипов А.Р.", "time": "08:59:33", "day": "9", "late": 0},
+            {"username": "Анисимов С.С.", "time": "09:12:22", "day": "9", "late": 1},
+            {"username": "Анисимов С.С.", "time": "18:04:10", "day": "9", "late": 0},
+            {"username": "Гарипов А.Р", "time": "18:06:38", "day": "9", "late": 0},
+            {"username": "Смычников А.С.", "time": "18:09:33", "day": "9", "late": 0},
+            {"username": "Беляков Е.А.", "time": "09:12:22", "day": "10", "late": 0},
+            {"username": "Смычников А.С.", "time": "08:38:29", "day": "10", "late": 0},
+            {"username": "Гарипов А.Р.", "time": "08:40:24", "day": "10", "late": 0},
+            {"username": "Анисимов С.С.", "time": "08:40:38", "day": "10", "late": 0},
+            {"username": "Беляков Е.А.", "time": "09:05:22", "day": "10", "late": 1},
+            {"username": "Пукин В.В.", "time": "09:06:22", "day": "10", "late": 1}
+        ];
+        $('.test').schedule({names: names, data: data});
     </script>
 </html>

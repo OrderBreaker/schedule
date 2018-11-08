@@ -13,6 +13,8 @@ var del = require('del');
 var sass = require('gulp-sass');
 var newer = require('gulp-newer');
 var rename = require('gulp-rename');
+var webpack = require('webpack');
+var gulpWebpack = require('webpack-stream');
 
 gulp.task('serve', function(){
 	browserSync.init({
@@ -44,8 +46,11 @@ gulp.task('pages', function(){
 gulp.task('jscripts', function() {
     return gulp.src('app/js/*.js')
         .pipe(plumber())
-        .pipe(concat('schedule.js'))
+        /* .pipe(concat('schedule.js'))
         .pipe(uglify())
+		.pipe(webpack()) 
+		*/
+		.pipe(gulpWebpack({}, webpack))
         .pipe(rename('schedule.min.js'))
         .pipe(gulp.dest('dist/assets/js'));
 });
